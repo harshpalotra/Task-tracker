@@ -10,7 +10,7 @@ const UpdateTask = () => {
 
   const fetchTask = async () => {
     try {
-      const res = await axios.get(`/api/projects/${projectId}/tasks/${taskId}`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setTask(res.data.task);
@@ -26,7 +26,7 @@ const UpdateTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/projects/${projectId}/tasks/${taskId}`, task, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks/${taskId}`, task, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       alert('Task updated');

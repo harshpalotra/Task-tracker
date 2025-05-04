@@ -20,7 +20,7 @@ const CreateTask = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `/api/projects/${projectId}/tasks`,
+       `${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks`,
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },

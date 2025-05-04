@@ -9,7 +9,7 @@ const Projects = () => {
   // Fetch all projects for the logged-in user
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('/api/projects', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
@@ -29,7 +29,7 @@ const Projects = () => {
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`/api/projects/${projectId}`, {
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`,
       },

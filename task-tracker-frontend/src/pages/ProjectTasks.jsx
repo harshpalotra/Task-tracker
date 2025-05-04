@@ -9,7 +9,7 @@ const ProjectTasks = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get(`/api/projects/${projectId}/tasks`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setTasks(res.data.tasks || []);
@@ -22,7 +22,7 @@ const ProjectTasks = () => {
   const deleteTask = async (taskId) => {
     if (!window.confirm('Are you sure you want to delete this task?')) return;
     try {
-      await axios.delete(`/api/projects/${projectId}/tasks/${taskId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setTasks(tasks.filter((task) => task._id !== taskId));

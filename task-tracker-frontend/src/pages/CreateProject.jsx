@@ -14,7 +14,7 @@ const CreateProject = () => {
     }
 
     try {
-      await axios.post('/api/projects', { name }, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, { name }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
