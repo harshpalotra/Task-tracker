@@ -14,7 +14,10 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: 'https://task-tracker-bfhu.vercel.app',  // 👈 Replace with your actual deployed frontend URL
+  credentials: true
+}));
 
 
 app.use(cookieParser());
