@@ -6,10 +6,24 @@ dotenv.config();
 
 export const signup = async (req, res) => {
   const { email, password, name, country } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = new User({ email, password: hashedPassword, name, country });
-  await newUser.save();
-  res.status(201).json({ message: "Signup Successful" });
+
+  try {
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log(existingUser);
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
+    // Hash password and save new user
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const newUser = new User({ email, password: hashedPassword, name, country });
+    await newUser.save();
+
+    res.status(201).json({ message: "Signup Successful" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 export const login = async (req, res) => {
